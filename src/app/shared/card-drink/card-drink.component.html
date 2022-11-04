@@ -1,0 +1,20 @@
+<div
+  class="card m-2 bg-dark border border-secondary"
+  id="{{ drink['idDrinks'] }}"
+>
+  <img src="{{ drink.strDrinkThumb }}" class="card-img-top" width="20" />
+  <div class="card-body">
+    <h5 class="card-title text-light">{{ drink["strDrink"] }}</h5>
+    <p class="card-text text-light" *ngIf="drink['strGlass']">
+      Glass: {{ drink["strGlass"] }}
+    </p>
+  </div>
+
+  <button
+    type="button"
+    class="btn btn-dark border border-secondary"
+    [routerLink]="'/drink/' + drink.idDrink"
+  >
+    Learn more
+  </button>
+</div>

@@ -1,0 +1,76 @@
+<html class="bg-dark" id="page-bg">
+  <body class="bg-dark">
+    <nav class="navbar navbar-dark bg-dark">
+      <div class="container-fluid">
+        <span class="mb-0 h1 text-light" [routerLink]="'/home'"
+          >The cocktail DB</span
+        >
+      </div>
+    </nav>
+
+    <div class="container">
+      <div
+        class="d-flex flex-row justify-content-center align-items-center mt-5"
+      >
+        <div class="col-8" style="margin-bottom: 5rem">
+          <div
+            class="search d-flex flex-row justify-content-center align-items-center"
+          >
+            <button
+              class="btn btn-dark border border-secondary"
+              [routerLink]="'/search'"
+            >
+              Search drinks by name or ingredient
+            </button>
+          </div>
+        </div>
+      </div>
+      <div
+        class="card bg-dark border-secondary"
+        style="width: 30rem; height: 20rem; margin: auto"
+      >
+        <img
+          src="{{ ingredientImg }}"
+          class=""
+          alt="{{ ingredient }}"
+          style="width: 15rem; margin: auto"
+        />
+
+        <h2 class="text-light" style="margin: auto">{{ ingredient }}</h2>
+      </div>
+    </div>
+
+    <div *ngIf="!drinks">
+      <div class="card m-2 bg-dark border border-secondary">
+        <div class="card-body">
+          <h5 class="card-title text-light">
+            There are no drinks for this ingredient
+          </h5>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="drinks">
+      <div
+        class="d-flex flex-row justify-content-center align-items-center mt-5"
+      >
+        <div class="col-8">
+          <div
+            class="search d-flex flex-row justify-content-center align-items-center"
+          >
+            <h2 class="text-light">results: {{ drinks.length }}</h2>
+          </div>
+        </div>
+      </div>
+      <div
+        class="d-flex flex-row flex-wrap justify-content-between"
+        style="margin: 5%"
+      >
+        <ng-container *ngFor="let drink of drinks">
+          <div style="width: 20%">
+            <app-card-drink [drink]="drink"></app-card-drink>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </body>
+</html>

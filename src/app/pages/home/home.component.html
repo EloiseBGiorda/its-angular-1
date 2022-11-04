@@ -1,1 +1,117 @@
-HOME
+<html id="page-bg">
+  <body
+    class="bg-dark"
+    id="body-bg"
+    style="padding-bottom: 1rem; min-height: 100vh !important"
+  >
+    <nav class="navbar navbar-dark bg-dark">
+      <div class="container-fluid">
+        <span class="mb-0 h1 text-light" [routerLink]="'/home/a'"
+          >The cocktail DB</span
+        >
+      </div>
+    </nav>
+
+    <div class="container">
+      <div
+        class="d-flex flex-row justify-content-center align-items-center mt-5"
+      >
+        <div class="col-8">
+          <div
+            class="search d-flex flex-row justify-content-center align-items-center"
+          >
+            <button
+              class="btn btn-dark border border-secondary"
+              [routerLink]="'/search'"
+            >
+              Search drinks by name or ingredient
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex flex-row justify-content-center align-items-center mt-5">
+      <div class="col-8">
+        <div
+          class="search d-flex flex-row justify-content-center align-items-center"
+        >
+          <nav aria-label="...">
+            <ul class="pagination pagination-sm">
+              <li class="page-item" *ngFor="let letter of letters">
+                <a
+                  class="page-link bg-dark text-light"
+                  [routerLink]="'/home/' + letter"
+                  >{{ letter }}</a
+                >
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!drinks">
+      <div class="card m-2 bg-dark border border-secondary">
+        <div class="card-body">
+          <h5 class="card-title text-light">
+            There are no drinks for the letter {{ letters[letterIdx] }}
+          </h5>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="drinks">
+      <div
+        class="d-flex flex-row justify-content-center align-items-center mt-5"
+      >
+        <div class="col-8">
+          <div
+            class="search d-flex flex-row justify-content-center align-items-center"
+          >
+            <h2 class="text-light">results: {{ drinks.length }}</h2>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="featuredDrink">
+        <div class="card mb-3" style="max-width: 50vw; margin: auto">
+          <div class="row g-0 bg-dark">
+            <div class="col-md-4">
+              <img
+                src="{{ featuredDrink.strDrinkThumb }}"
+                class="img-fluid rounded-start"
+                alt="{{ featuredDrink['strDrink'] }}"
+              />
+            </div>
+            <div class="col-md-8">
+              <div class="card-body bg-dark">
+                <h5 class="card-title text-light">
+                  {{ featuredDrink["strDrink"] }}
+                </h5>
+                <p class="card-text text-light">
+                  Glass: {{ featuredDrink["strGlass"] }}
+                </p>
+                <button
+                  type="button"
+                  class="btn btn-dark border border-secondary"
+                  [routerLink]="'/drink/' + featuredDrink.idDrink"
+                >
+                  Learn more
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="d-flex flex-row flex-wrap justify-content-between"
+        style="margin: 5%"
+      >
+        <ng-container *ngFor="let drink of drinks">
+          <div *ngIf="drink != featuredDrink" style="width: 20%">
+            <app-card-drink [drink]="drink"></app-card-drink>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </body>
+</html>

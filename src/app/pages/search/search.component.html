@@ -1,0 +1,96 @@
+<html class="bg-dark" id="page-bg">
+  <body class="bg-dark">
+    <nav class="navbar navbar-dark bg-dark">
+      <div class="container-fluid">
+        <span class="mb-0 h1 text-light" [routerLink]="'/home'"
+          >The cocktail DB</span
+        >
+      </div>
+    </nav>
+
+    <div class="container">
+      <div
+        class="d-flex flex-row justify-content-center align-items-center mt-5"
+      >
+        <div class="col-8">
+          <div
+            class="search d-flex flex-row justify-content-center align-items-center"
+          >
+            <input
+              type="text"
+              class="form-control"
+              name="searchName"
+              placeholder="Want to search for a particular drink? Type here"
+              [(ngModel)]="jsonIn.drinkName"
+            />
+            <button
+              class="btn btn-dark border border-secondary"
+              (click)="searchByName()"
+            >
+              Search
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div
+        class="d-flex flex-row justify-content-center align-items-center mt-5"
+      >
+        <div class="col-8">
+          <div
+            class="search d-flex flex-row justify-content-center align-items-center"
+          >
+            <select
+              class="form-select"
+              aria-label="Default select example"
+              [(ngModel)]="jsonIn.ingredientName"
+            >
+              <option value="" disabled selected>Select your option</option>
+              <option *ngFor="let ingredient of ingredients">
+                {{ ingredient.strIngredient1 }}
+              </option>
+            </select>
+            <button
+              class="btn btn-dark border border-secondary"
+              (click)="searchByIngredient()"
+            >
+              Search
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!drinks">
+      <div class="card m-2 bg-dark border border-secondary">
+        <div class="card-body">
+          <h5 class="card-title text-light">There are no drinks</h5>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="drinks">
+      <div
+        class="d-flex flex-row justify-content-center align-items-center mt-5"
+      >
+        <div class="col-8">
+          <div
+            class="search d-flex flex-row justify-content-center align-items-center"
+          >
+            <h2 class="text-light">results: {{ drinks.length }}</h2>
+          </div>
+        </div>
+      </div>
+      <div
+        class="d-flex flex-row flex-wrap justify-content-between"
+        style="margin: 5%"
+      >
+        <ng-container *ngFor="let drink of drinks">
+          <div style="width: 20%">
+            <app-card-drink [drink]="drink"></app-card-drink>
+          </div>
+        </ng-container>
+      </div>
+    </div>
+  </body>
+</html>

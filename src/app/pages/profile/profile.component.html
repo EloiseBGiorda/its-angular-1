@@ -1,0 +1,323 @@
+<form>
+  <div class="mb-3">
+    <div class="form-check">
+      <input
+        class="personType"
+        type="radio"
+        name="personType"
+        id="personType1"
+        checked
+        (click)="changeUserType(1)"
+      />
+      <label class="form-check-label" for="personType1"> Persona Fisica </label>
+    </div>
+    <div class="form-check">
+      <input
+        class="personType"
+        type="radio"
+        name="personType"
+        id="personType2"
+        (click)="changeUserType(0)"
+      />
+      <label class="form-check-label" for="personType2">
+        Persona Giuridica
+      </label>
+    </div>
+
+    <div *ngIf="physicalUser === true">
+      <div class="row g-3">
+        <div class="col">
+          <input
+            type="text"
+            class="form-control"
+            name="name"
+            placeholder="Nome"
+            aria-label="Nome"
+            required
+            [(ngModel)]="jsonIn.name"
+          />
+        </div>
+        <div class="col">
+          <input
+            type="text"
+            class="form-control"
+            name="surname"
+            placeholder="Cognome"
+            aria-label="Cognome"
+            required
+            [(ngModel)]="jsonIn.surname"
+          />
+        </div>
+      </div>
+    </div>
+    <div *ngIf="physicalUser === false">
+      <div class="col">
+        <input
+          type="text"
+          class="form-control"
+          name="ragSociale"
+          placeholder="Ragione Sociale"
+          aria-label="Ragione Sociale"
+          required
+          [(ngModel)]="jsonIn.ragSociale"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-2">
+        <label for="inputTipoVia" class="form-label">Tipo Via</label>
+        <select
+          id="inputTipoVia"
+          class="form-select"
+          name="inputTipoVia"
+          [(ngModel)]="jsonIn.inputTipoVia"
+        >
+          <option selected>Via</option>
+          <option>Corso</option>
+          <option>Borgata</option>
+          <option>Strada</option>
+        </select>
+      </div>
+      <div class="col-6">
+        <label for="inputAddress" class="form-label">Nome Via</label>
+        <input
+          type="text"
+          class="form-control"
+          id="inputAddress"
+          name="inputAddress"
+          placeholder="Strada"
+          required
+          [(ngModel)]="jsonIn.inputAddress"
+        />
+      </div>
+      <div class="col-2">
+        <label for="civicNumber" class="form-label">Numero Civico</label>
+        <input
+          type="text"
+          class="form-control"
+          id="civicNumber"
+          name="civicNumber"
+          required
+          [(ngModel)]="jsonIn.civicNumber"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+        <label for="inputZip" class="form-label">Zip</label>
+        <input
+          type="number"
+          class="form-control"
+          id="inputZip"
+          minlength="5"
+          maxlength="5"
+          name="inputZip"
+          required
+          [(ngModel)]="jsonIn.inputZip"
+        />
+      </div>
+      <div class="col-md-6">
+        <label for="inputCity" class="form-label">City</label>
+        <input
+          type="text"
+          class="form-control"
+          id="inputCity"
+          name="inputCity"
+          required
+          [(ngModel)]="jsonIn.inputCity"
+        />
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-3">
+        <label for="inputProvincia" class="form-label">Provincia</label>
+        <select
+          id="inputProvincia"
+          class="form-select"
+          id="inputProvince"
+          [(ngModel)]="jsonIn.inputProvince"
+        >
+          <option value="prov1" selected>Prov 1</option>
+          <option value="prov2">Prov 2</option>
+          <option value="prov3">Prov 3</option>
+        </select>
+      </div>
+      <div class="col-3">
+        <label for="inputComune" class="form-label">Comune</label>
+        <select
+          id="inputComune"
+          class="form-select"
+          [(ngModel)]="jsonIn.inputComune"
+        >
+          <option value="com1" selected>Com 1</option>
+          <option value="com2">Com 2</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label for="inputLocalita" class="form-label">Località</label>
+        <input
+          type="text"
+          class="form-control"
+          id="inputLocalita"
+          [(ngModel)]="jsonIn.inputLocalita"
+        />
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <label for="inputState" class="form-label">Stato</label>
+      <select
+        id="inputState"
+        class="form-select"
+        [(ngModel)]="jsonIn.inputState"
+      >
+        <option value="state1" selected>Stato 1</option>
+        <option value="state2">Stato 2</option>
+      </select>
+    </div>
+    <div class="row">
+      <div class="col-3">
+        <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+        <input
+          type="email"
+          class="form-control"
+          id="inputEmail3"
+          [(ngModel)]="jsonIn.email"
+          required
+        />
+      </div>
+      <div class="col-3">
+        <label for="inputTel" class="col-sm-2 col-form-label">Telefono</label>
+        <input
+          type="number"
+          class="form-control"
+          id="inputTel"
+          minlength="10"
+          maxlength="10"
+          required
+          [(ngModel)]="jsonIn.tel"
+        />
+      </div>
+      <div class="col-3">
+        <label for="inputPec" class="col-sm-2 col-form-label">PEC</label>
+        <input
+          type="email"
+          class="form-control"
+          id="inputPec"
+          [(ngModel)]="jsonIn.pec"
+          required
+        />
+      </div>
+      <div class="col-3">
+        <label for="inputFax" class="col-sm-2 col-form-label">Fax</label>
+        <input
+          type="number"
+          class="form-control"
+          id="inputFax"
+          minlength="10"
+          maxlength="10"
+          [(ngModel)]="jsonIn.fax"
+        />
+      </div>
+    </div>
+    <div class="col-sm-10" *ngIf="physicalUser === true">
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          id="checkMaggiorenne"
+          required
+          [(ngModel)]="jsonIn.ofAge"
+        />
+        <label class="form-check-label" for="checkMaggiorenne">
+          Maggiorenne
+        </label>
+      </div>
+    </div>
+    <div class="col-sm-10">
+      <div class="form-check">
+        <p class="products-header">Prodotti interessanti</p>
+        <div>
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="product1"
+            name="product1"
+            value="Auto"
+          />
+          <label for="product1"> Auto</label><br />
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="product2"
+            name="product2"
+            value="Vita"
+          />
+          <label for="product2"> Vita</label><br />
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="product3"
+            name="product3"
+            value="Salute"
+          />
+          <label for="product3"> Salute</label><br /><br />
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-10" *ngIf="physicalUser === true">
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="flexRadioDefault"
+          id="flexRadioDefault1"
+          checked
+        />
+        <label class="form-check-label" for="flexRadioDefault1"> Donna </label>
+      </div>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="flexRadioDefault"
+          id="flexRadioDefault2"
+        />
+        <label class="form-check-label" for="flexRadioDefault2"> Uomo </label>
+      </div>
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="flexRadioDefault"
+          id="flexRadioDefault3"
+        />
+        <label class="form-check-label" for="flexRadioDefault3"> Altro </label>
+      </div>
+      <div class="col">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Codice Fiscale"
+          aria-label="CF"
+          required
+          [(ngModel)]="jsonIn.cf"
+        />
+      </div>
+    </div>
+    <div class="col-sm-10" *ngIf="physicalUser === true">
+      <div class="col">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Partita IVA"
+          aria-label="partitaIVA"
+          required
+          [(ngModel)]="jsonIn.pIva"
+        />
+      </div>
+    </div>
+    <input type="submit" value="Submit" (click)="printJson()" />
+  </div>
+</form>

@@ -1,0 +1,76 @@
+<html class="bg-dark" id="page-bg">
+  <body class="bg-dark">
+    <nav class="navbar navbar-dark bg-dark">
+      <div>
+        <span class="mb-0 h1 text-light" [routerLink]="'/home'"
+          >The cocktail DB</span
+        >
+      </div>
+    </nav>
+    <div style="margin-left: 5rem; width: 7rem; margin-top: 1rem">
+      <h6 class="text-light">language:</h6>
+      <select
+        class="form-select bg-dark text-light"
+        aria-label="Default select example "
+        [(ngModel)]="lang"
+      >
+        <option value="en" class="text-light" selected>en</option>
+        <option value="es" class="text-light">es</option>
+        <option value="de" class="text-light">de</option>
+        <option value="fr" class="text-light">fr</option>
+        <option value="it" class="text-light">it</option>
+      </select>
+    </div>
+    <div
+      class="d-flex flex-row flex-wrap justify-content-between"
+      style="margin: 0 5%"
+    >
+      <div style="width: 50%; margin: auto" *ngIf="drinkDetails != null">
+        <div
+          class="card m-2 bg-dark border-secondary"
+          id="{{ drinkDetails['idDrinks'] }}"
+        >
+          <div class="card-body">
+            <h3 class="card-title text-light" style="margin: auto">
+              {{ drinkDetails["strDrink"] }}
+            </h3>
+            <img
+              src="{{ drinkDetails.strDrinkThumb }}"
+              class="card-img"
+              style="width: 50%"
+            />
+            <p class="card-text text-light">
+              Glass: {{ drinkDetails["strGlass"] }}
+            </p>
+            <h5 class="card-title text-light">Ingredients</h5>
+            <div *ngFor="let ingredient of drinkIngredients">
+              <button
+                type="button"
+                class="btn text-light"
+                [routerLink]="'/ingredient/' + ingredient"
+              >
+                {{ ingredient }}
+              </button>
+            </div>
+            <h5 class="card-title text-light">Instructions:</h5>
+            <p class="card-text text-light" *ngIf="lang === 'en'">
+              {{ instructions[0] }}
+            </p>
+            <p class="card-text text-light" *ngIf="lang === 'es'">
+              {{ instructions[1] }}
+            </p>
+            <p class="card-text text-light" *ngIf="lang === 'de'">
+              {{ instructions[2] }}
+            </p>
+            <p class="card-text text-light" *ngIf="lang === 'fr'">
+              {{ instructions[3] }}
+            </p>
+            <p class="card-text text-light" *ngIf="lang === 'it'">
+              {{ instructions[4] }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
