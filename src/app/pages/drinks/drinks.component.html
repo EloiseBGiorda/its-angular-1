@@ -2,7 +2,7 @@
   <body class="bg-dark">
     <nav class="navbar navbar-dark bg-dark">
       <div>
-        <span class="mb-0 h1 text-light" [routerLink]="'/home'"
+        <span class="mb-0 h1 text-light m-0" [routerLink]="'/home'"
           >The cocktail DB</span
         >
       </div>
@@ -14,22 +14,22 @@
         aria-label="Default select example "
         [(ngModel)]="lang"
       >
-        <option value="en" class="text-light" selected>en</option>
-        <option value="es" class="text-light">es</option>
-        <option value="de" class="text-light">de</option>
-        <option value="fr" class="text-light">fr</option>
-        <option value="it" class="text-light">it</option>
+        <option
+          *ngFor="let langs of instructionLanguages"
+          value="{{ langs }}"
+          class="text-light"
+          [attr.selected]="langs == 'EN' ? true : null"
+        >
+          {{ langs }}
+        </option>
       </select>
     </div>
     <div
       class="d-flex flex-row flex-wrap justify-content-between"
       style="margin: 0 5%"
     >
-      <div style="width: 50%; margin: auto" *ngIf="drinkDetails != null">
-        <div
-          class="card m-2 bg-dark border-secondary"
-          id="{{ drinkDetails['idDrinks'] }}"
-        >
+      <div style="margin: auto" *ngIf="drinkDetails != null">
+        <div class="card m-2 bg-dark border-secondary">
           <div class="card-body">
             <h3 class="card-title text-light" style="margin: auto">
               {{ drinkDetails["strDrink"] }}
@@ -40,33 +40,21 @@
               style="width: 50%"
             />
             <p class="card-text text-light">
-              Glass: {{ drinkDetails["strGlass"] }}
+              Category: {{ drinkDetails["strCategory"] }}
             </p>
             <h5 class="card-title text-light">Ingredients</h5>
-            <div *ngFor="let ingredient of drinkIngredients">
+            <div *ngFor="let ingredient of drinkDetails.ingredients">
               <button
                 type="button"
                 class="btn text-light"
-                [routerLink]="'/ingredient/' + ingredient"
+                [routerLink]="'/ingredient/' + ingredient.name"
               >
-                {{ ingredient }}
+                {{ ingredient.name }}: {{ ingredient.measure }}
               </button>
             </div>
             <h5 class="card-title text-light">Instructions:</h5>
-            <p class="card-text text-light" *ngIf="lang === 'en'">
-              {{ instructions[0] }}
-            </p>
-            <p class="card-text text-light" *ngIf="lang === 'es'">
-              {{ instructions[1] }}
-            </p>
-            <p class="card-text text-light" *ngIf="lang === 'de'">
-              {{ instructions[2] }}
-            </p>
-            <p class="card-text text-light" *ngIf="lang === 'fr'">
-              {{ instructions[3] }}
-            </p>
-            <p class="card-text text-light" *ngIf="lang === 'it'">
-              {{ instructions[4] }}
+            <p class="card-text text-light">
+              {{ drinkDetails.instructions[lang] }}
             </p>
           </div>
         </div>

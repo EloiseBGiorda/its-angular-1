@@ -1,0 +1,121 @@
+<html class="bg-dark" id="page-bg">
+  <body class="bg-dark">
+    <nav class="navbar navbar-dark bg-dark">
+      <div class="container-fluid">
+        <span class="mb-0 h1 text-light" [routerLink]="'/home'"
+          >The cocktail DB</span
+        >
+      </div>
+    </nav>
+
+    <div class="container">
+      <div
+        class="d-flex flex-row justify-content-center align-items-center mt-5"
+      >
+        <div class="col-8">
+          <div
+            class="search d-flex flex-row justify-content-center align-items-center"
+          >
+            <span class="h1 text-light" style="margin: auto"
+              >Order your drinks right here!</span
+            >
+          </div>
+        </div>
+      </div>
+      <div
+        class="d-flex flex-row justify-content-center align-items-center mt-5"
+      >
+        <div class="col-8">
+          <div
+            class="search d-flex flex-row justify-content-center align-items-center"
+          >
+            <input
+              type="text"
+              class="form-control"
+              name="searchName"
+              placeholder="What drink are you looking to order? Type here"
+              [(ngModel)]="jsonIn.drinkName"
+            />
+            <button
+              class="btn btn-dark border border-secondary"
+              (click)="searchByName()"
+            >
+              Search
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!drinks">
+      <div class="card m-2 bg-dark border border-secondary">
+        <div class="card-body">
+          <h5 class="card-title text-light">
+            There are no drinks with this name
+          </h5>
+        </div>
+      </div>
+    </div>
+    <div class="pb-4" *ngIf="drinks">
+      <div *ngIf="drinkSearched">
+        <div
+          class="d-flex flex-row justify-content-center align-items-center mt-5"
+        >
+          <div class="col-8">
+            <div
+              class="search d-flex flex-row justify-content-center align-items-center"
+            >
+              <h2 class="text-light">results: {{ drinks.length }}</h2>
+            </div>
+            <div style="min-height: 6rem">
+              <div
+                class="alert alert-warning"
+                role="alert"
+                *ngIf="orderedDrinksIds.length < 2"
+              >
+                Select at least two drinks to order
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" style="max-width: 98%">
+        <div class="col-6">
+          <ul class="list-group" style="margin-left: 5rem">
+            <li
+              *ngFor="let drink of drinks"
+              (click)="toggleSelection($event, drink)"
+            >
+              <app-list-item-drink
+                [drink]="drink"
+                [image]="image"
+              ></app-list-item-drink>
+            </li>
+          </ul>
+        </div>
+        <div class="col-6">
+          <p
+            class="h5 text-light"
+            style="margin-left: 5%"
+            *ngIf="orderedDrinks.length >= 1"
+          >
+            your cart:
+          </p>
+          <div
+            class="d-flex flex-row flex-wrap justify-content-between"
+            style="margin: 5%; height: 16rem"
+          >
+            <ng-container *ngFor="let drink of orderedDrinks">
+              <div style="width: 20%">
+                <app-card-drink
+                  [drink]="drink"
+                  [button]="false"
+                  (click)="deselectOrdered(drink)"
+                ></app-card-drink>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

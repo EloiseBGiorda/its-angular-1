@@ -13,6 +13,10 @@ import { DrinksComponent } from './pages/drinks/drinks.component';
 import { IngredientComponent } from './pages/ingredient/ingredient.component';
 import { SearchComponent } from './pages/search/search.component';
 import { CardDrinkComponent } from './shared/card-drink/card-drink.component';
+import { OrderComponent } from './pages/order/order.component';
+import { ListItemDrinkComponent } from './shared/list-item-drink/list-item-drink.component';
+import { BlockUIModule } from 'ng-block-ui';
+import { BlockUIHttpModule } from 'ng-block-ui/http';
 
 @NgModule({
   declarations: [
@@ -24,6 +28,8 @@ import { CardDrinkComponent } from './shared/card-drink/card-drink.component';
     IngredientComponent,
     SearchComponent,
     CardDrinkComponent,
+    OrderComponent,
+    ListItemDrinkComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,6 +37,8 @@ import { CardDrinkComponent } from './shared/card-drink/card-drink.component';
     AppRoutingModule,
     NgbModule,
     FormsModule,
+    BlockUIModule.forRoot(),
+    BlockUIHttpModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { ApiService } from 'src/app/_service/api.service';
+import { DrinkCard } from 'src/app/_models/drink-card.model';
 
 @Component({
   selector: 'app-search',
@@ -13,49 +15,42 @@ export class SearchComponent implements OnInit {
     drinkName: '',
     ingredientName: '',
   };
-  drinks: any[] = [];
+  drinks: DrinkCard[] = [];
   ingredients: any[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private httpClient: HttpClient,
     private router: Router,
-    private location: Location
+    private location: Location,
+    private service: ApiService
   ) {}
 
   searchByName() {
-    console.log(this.jsonIn);
     if (this.jsonIn.drinkName)
-      this.httpClient
-        .get(
-          `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${this.jsonIn.drinkName}`
-        )
+      this.service
+        .lookupDrinkByName(this.jsonIn.drinkName)
         .subscribe((response: any) => {
           console.log(response);
-          this.drinks = response.drinks;
+          this.drinks = response;
         });
   }
 
   searchByIngredient() {
-    console.log(this.jsonIn.ingredientName);
     if (this.jsonIn.ingredientName)
-      this.httpClient
-        .get(
-          `https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${this.jsonIn.ingredientName}`
-        )
+      this.service
+        .lookupDrinkByIngredient(this.jsonIn.ingredientName)
         .subscribe((response: any) => {
           console.log(response);
-          this.drinks = response.drinks;
+          this.drinks = response;
         });
   }
 
   getIngredients() {
-    this.httpClient
-      .get(`https://www.thecocktaildb.com/api/json/v1/1/list.php?i=list`)
-      .subscribe((response: any) => {
-        console.log(response);
-        this.ingredients = response.drinks;
-      });
+    this.httpClient;
+    this.service.lookupIngredients().subscribe((response: any) => {
+      this.ingredients = response;
+    });
   }
 
   ngOnInit(): void {

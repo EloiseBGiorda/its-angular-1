@@ -9,6 +9,12 @@
         <span class="mb-0 h1 text-light" [routerLink]="'/home/a'"
           >The cocktail DB</span
         >
+        <button
+          class="btn btn-dark border border-secondary"
+          [routerLink]="'/order'"
+        >
+          Order drinks
+        </button>
       </div>
     </nav>
 
@@ -106,9 +112,9 @@
         class="d-flex flex-row flex-wrap justify-content-between"
         style="margin: 5%"
       >
-        <ng-container *ngFor="let drink of drinks">
+        <ng-container *ngFor="let drink of drinks; trackBy: trackByDrink">
           <div *ngIf="drink != featuredDrink" style="width: 20%">
-            <app-card-drink [drink]="drink"></app-card-drink>
+            <app-card-drink [drink]="drink" [button]="true"></app-card-drink>
           </div>
         </ng-container>
       </div>
