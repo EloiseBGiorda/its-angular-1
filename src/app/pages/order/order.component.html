@@ -2,9 +2,12 @@
   <body class="bg-dark">
     <nav class="navbar navbar-dark bg-dark">
       <div class="container-fluid">
-        <span class="mb-0 h1 text-light" [routerLink]="'/home'"
-          >The cocktail DB</span
-        >
+        <img
+          src="../../../assets/logo-title-white.svg"
+          alt="The cocktailDB"
+          style="color: white; max-width: 20rem; padding: 1rem"
+          [routerLink]="'/home'"
+        />
       </div>
     </nav>
 
@@ -93,13 +96,17 @@
           </ul>
         </div>
         <div class="col-6">
-          <p
+          <div
             class="h5 text-light"
             style="margin-left: 5%"
             *ngIf="orderedDrinks.length >= 1"
           >
-            your cart:
-          </p>
+            <p>your cart:</p>
+            <button type="button" class="btn btn-dark border border-secondary">
+              Clear cart
+            </button>
+          </div>
+
           <div
             class="d-flex flex-row flex-wrap justify-content-between"
             style="margin: 5%; height: 16rem"
