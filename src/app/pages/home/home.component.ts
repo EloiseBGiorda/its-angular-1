@@ -12,13 +12,7 @@ import { DrinkCard } from 'src/app/_models/drink-card.model';
 export class HomeComponent implements OnInit {
   drinks: DrinkCard[] = [];
 
-  jsonIn = {
-    searchName: '',
-  };
-
   featuredDrink: any;
-
-  letterIdx: number = 0;
 
   letters: string[] = 'abcdefghijklmnopqrstuvwxyz'.split('');
 
@@ -28,21 +22,12 @@ export class HomeComponent implements OnInit {
     });
   };
 
-  constructor(
-    private route: ActivatedRoute,
-    private httpClient: HttpClient,
-    private router: Router,
-    private service: ApiService
-  ) {}
+  constructor(private route: ActivatedRoute, private service: ApiService) {}
   ngOnInit(): void {
     this.route.data.subscribe(({ drink }) => {
       this.drinks = drink;
     });
     this.getFeaturedDrink();
-  }
-
-  refresh(): void {
-    window.location.reload();
   }
 
   trackByDrink(d: any) {

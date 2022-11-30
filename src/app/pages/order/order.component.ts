@@ -24,11 +24,7 @@ export class OrderComponent implements OnInit {
 
   orderedDrinksIds: string[] = [];
 
-  constructor(
-    private service: ApiService,
-    private httpClient: HttpClient,
-    private renderer: Renderer2
-  ) {}
+  constructor(private service: ApiService) {}
 
   searchByName() {
     this.drinkSearched = true;
@@ -62,8 +58,6 @@ export class OrderComponent implements OnInit {
         alert('You can only order 5 drinks at a time');
       }
     }
-
-    console.log(this.orderedDrinksIds);
   }
 
   checkOrderedDrinks(drink: any) {

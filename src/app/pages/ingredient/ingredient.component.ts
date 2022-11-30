@@ -15,12 +15,7 @@ export class IngredientComponent implements OnInit {
   ingredient: string = '';
   ingredientImg: string = '';
 
-  constructor(
-    private route: ActivatedRoute,
-    private httpClient: HttpClient,
-    private location: Location,
-    private service: ApiService
-  ) {}
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.ingredient = this.route.snapshot.paramMap.get('ingredient')!;
@@ -28,8 +23,5 @@ export class IngredientComponent implements OnInit {
       this.drinks = drink;
       this.ingredientImg = `https://www.thecocktaildb.com/images/ingredients/${this.ingredient}.png`;
     });
-  }
-  back(): void {
-    this.location.back();
   }
 }

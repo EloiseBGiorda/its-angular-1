@@ -18,13 +18,7 @@ export class SearchComponent implements OnInit {
   drinks: DrinkCard[] = [];
   ingredients: any[] = [];
 
-  constructor(
-    private route: ActivatedRoute,
-    private httpClient: HttpClient,
-    private router: Router,
-    private location: Location,
-    private service: ApiService
-  ) {}
+  constructor(private service: ApiService) {}
 
   searchByName() {
     if (this.jsonIn.drinkName)
@@ -47,7 +41,6 @@ export class SearchComponent implements OnInit {
   }
 
   getIngredients() {
-    this.httpClient;
     this.service.lookupIngredients().subscribe((response: any) => {
       this.ingredients = response;
     });
@@ -55,9 +48,5 @@ export class SearchComponent implements OnInit {
 
   ngOnInit(): void {
     this.getIngredients();
-  }
-
-  back(): void {
-    this.location.back();
   }
 }
